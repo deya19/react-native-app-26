@@ -23,22 +23,6 @@ export default function Index() {
       >
         Go to Sign Up
       </Link>
-      <Link
-        href={{
-          pathname: "/subscriptions/[id]",
-          params: { id: "spotify" },
-        }}
-      >
-        Spotify Subscription
-      </Link>
-      <Link
-        href={{
-          pathname: "/subscriptions/[id]",
-          params: { id: "claude" },
-        }}
-      >
-        Claude Max Subscription
-      </Link>
     </SafeAreaView>
   );
 }
