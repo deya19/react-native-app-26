@@ -49,7 +49,7 @@ export default function Welcome() {
   };
 
   return (
-    <SafeAreaView className="flex-2 bg-accent">
+    <SafeAreaView className="flex-1 bg-accent">
       <StyledScrollView
         className="flex-1"
         contentContainerClassName="flex-grow justify-between px-6 pb-10 pt-5"

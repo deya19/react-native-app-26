@@ -1,9 +1,9 @@
-import {SplashScreen, Stack, usePathname, useGlobalSearchParams} from "expo-router";
-import '@/global.css';
-import {useFonts} from "expo-font";
-import {useEffect, useRef} from "react";
-import { ClerkProvider, useAuth } from '@clerk/expo';
-import { tokenCache } from '@clerk/expo/token-cache';
+import "@/global.css";
+import { ClerkProvider, useAuth } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack, usePathname } from "expo-router";
+import { useEffect, useRef } from "react";
 // import { PostHogProvider } from 'posthog-react-native';
 // import { posthog } from '../src/config/posthog';
 
@@ -12,13 +12,12 @@ SplashScreen.preventAutoHideAsync();
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 if (!publishableKey) {
-  throw new Error('Add your Clerk Publishable Key to the .env file');
+  throw new Error("Add your Clerk Publishable Key to the .env file");
 }
 
 function RootLayoutContent() {
   const { isLoaded: authLoaded } = useAuth();
   const pathname = usePathname();
-  const params = useGlobalSearchParams();
   const previousPathname = useRef<string | undefined>(undefined);
 
   useEffect(() => {
@@ -38,23 +37,23 @@ function RootLayoutContent() {
       // });
       previousPathname.current = pathname;
     }
-  }, [pathname, params]);
+  }, [pathname]);
 
   const [fontsLoaded] = useFonts({
-    'sans-regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
-    'sans-bold': require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
-    'sans-medium': require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
-    'sans-semibold': require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
-    'sans-extrabold': require('../assets/fonts/PlusJakartaSans-ExtraBold.ttf'),
-    'sans-light': require('../assets/fonts/PlusJakartaSans-Light.ttf')
-  })
+    "sans-regular": require("../assets/fonts/PlusJakartaSans-Regular.ttf"),
+    "sans-bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
+    "sans-medium": require("../assets/fonts/PlusJakartaSans-Medium.ttf"),
+    "sans-semibold": require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
+    "sans-extrabold": require("../assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
+    "sans-light": require("../assets/fonts/PlusJakartaSans-Light.ttf"),
+  });
 
   useEffect(() => {
     // Hide splash only when both fonts and auth are loaded
     if (fontsLoaded && authLoaded) {
-      SplashScreen.hideAsync()
+      SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, authLoaded])
+  }, [fontsLoaded, authLoaded]);
 
   // Don't render app until both are ready
   if (!fontsLoaded || !authLoaded) return null;
@@ -72,9 +71,9 @@ export default function RootLayout() {
     //     propsToCapture: ['testID'],
     //   }}
     // >
-      <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-        <RootLayoutContent />
-      </ClerkProvider>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <RootLayoutContent />
+    </ClerkProvider>
     // </PostHogProvider>
   );
 }
